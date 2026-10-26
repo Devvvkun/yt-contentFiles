@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Google Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
+
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.formbody {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(211, 207, 207);
+
+    border-radius: 14px;
+
+    height: 80%;
+    width: 45%;
+
+    padding: 12px;
+}
+
+
+form {
+    width: 100%;
+}
+
+
+h2 {
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-bottom: 8px;
+}
+
+
+p {
+    margin-left: 12px;
+    margin-bottom: 12px;
+}
+
+
+label {
+    display: block;
+
+    margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+
+input {
+    padding: 9px 90px 9px 34px;
+
+    margin-left: 12px;
+    margin-bottom: 14px;
+
+    border: 2px solid #555;
+    border-radius: 5px;
+
+    outline: none;
+}
+input:focus{
+    border: 2px solid rgb(27, 174, 27);
+}
+#nameError, #phoneError ,#mailError ,#passError {
+    color: red;
+
+    margin-left: 12px;
+    margin-top: -15px;
+    margin-bottom: 8px;
+
+    display: none;
+}
+
+button {
+    padding: 7px 10px;
+
+    background-color: green;
+
+    border-radius: 6px;
+    border: none;
+
+    color: white;
+
+    margin-left: 40%;
+    margin-top: 12px;
+
+    cursor: pointer;
+}
+
+
+
+button:hover {
+    background-color: darkgreen;
+}
+
+
+
+button:active {
+    transform: scale(0.97);
+}
+.user , .phone , .mail, .pass{
+    background-color: gray;
+    position: absolute;
+    margin-left: 13px;
+    width: 30px;
+    height: 36px;
+    margin-top: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+</style>
+
+<body>
+
+<div class="formbody" id="formContainer">
+
+    <form id="userForm" novalidate>
+
+        <h2 id="formTitle">Submit your Form</h2>
+
+        <p id="requiredText">
+            All fields are required
+        </p>
+
+        <label for="name" id="nameLabel">
+            Name:
+        </label>
+
+
+        <div class="user" id="userIcon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            id="name"
+        >
+
+        <p id="nameError">
+            Name must have atleast 2 characters!
+        </p>
+
+
+        <label for="tel" id="phoneLabel">
+            Phone No.:
+        </label>
+        <div class="phone"><i class="fa-solid fa-phone"></i></div>
+        <input
+            type="tel"
+            name="tel"
+            placeholder="Enter 10 digit number"
+            id="tel"
+        >
+        <p id="phoneError">
+            Phone number must have atleast 10 digits!
+        </p>
+       
+        <label for="email" id="emailLabel">
+            Email:
+        </label>
+         <div class="mail"><i class="fa-solid fa-envelope"></i></div>
+        <input
+            type="email"
+            placeholder="Enter your Email"
+            name="email"
+            id="email"
+        >
+        <p id="mailError">
+            Invalid format!!
+        </p>
+
+        <label for="password" id="passwordLabel">
+            Password:
+        </label>
+        <div class="pass"><i class="fa-solid fa-key"></i></div>
+        <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+        >
+
+
+        <label for="confirmPass" id="confirmPasswordLabel">
+            Confirm Password:
+        </label>
+         <div class="pass"><i class="fa-solid fa-key"></i></div>
+        <input
+            type="password"
+            name="confirmPass"
+            id="confirmPass"
+            placeholder="Re-enter your password"
+        >
+        <p id="passError">
+            Password do not match
+        </p>
+        <button
+            type="button"
+            id="submitButton"
+            onclick="Submit()"
+        >
+            Submit
+        </button>
+
+    </form>
+
+</div>
+
+
+</body>
+
+<script>
+  function Submit(){
+    const name = document.getElementById("name").value
+    const nameError = document.getElementById("nameError")
+    const phoneError = document.getElementById("phoneError")
+    const mailError = document.getElementById("mailError")
+    const passError = document.getElementById("passError")
+    const phone = document.getElementById("tel").value
+    const mail = document.getElementById("email")
+    const email = document.getElementById("email").value
+    const pass = document.getElementById("password").value
+    const confirmPass = document.getElementById("confirmPass").value
+    if(name.length <=2){
+        console.log(name.length);
+        
+        nameError.style.display = "block";
+        }
+    if(phone.length !== 10){
+        phoneError.style.display ='block'
+    }
+    if(!mail.checkValidity()){
+        mailError.style.display = 'block'
+    }
+    if(email.length == 0){
+        mailError.innerText = 'Please enter your email';
+        mailError.style.display = 'block'
+    }
+    
+    if(pass !== confirmPass ){
+        passError.style.display = 'block'
+    }
+    else if(pass == '' || confirmPass == ''){
+        passError.innerText = 'Please enter your password';
+        passError.style.display = 'block'
+    }
+    }
+
+    
+
+</script>
+
+</html>

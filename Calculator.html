@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Calculator</title>
+</head>
+<style>
+    body{
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .calculatorBody{
+        display: flex;
+        flex-direction: column;
+        height: 65vh;
+        width: 50vh;
+        gap: 5px;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: black;
+    }
+    h1{
+        color: goldenrod;
+        margin-left: 12px;
+        
+    }
+    button{
+        height: 55px;
+        width: 65px;
+        padding: 15px 25px;
+        border: none;
+        color: white;
+        margin: 2px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input{
+        padding: 12px 10px;
+        border-radius: 12px;
+        margin: 8px;
+        background-color: gray;
+        color: White;
+        font-weight: bold;
+        font-size: 24px;
+    }
+    input:focus{
+        outline: none;
+    }
+    .gray-btn{
+        background-color: rgb(208, 207, 207);
+    }
+    .yellow-btn{
+        background-color: orange;
+    }
+    .black-btn{
+        background-color: rgb(44, 43, 43);
+    }
+    .row1 , .row2 , .row3 ,.row4 , .row5{
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+<body>
+    <div class="calculatorBody">
+        <h1>Calculator</h1>
+        <input type="text" name="display" id="display" readonly>
+        <div class="row1">
+        <button class="gray-btn" onclick="deleteNumber()"><i class="fa-solid fa-delete-left" ></i></button>
+        <button class="gray-btn" onclick="clearCalculator()">AC</button>
+        <button class="gray-btn" onclick="chooseOperator('%')">%</button>
+        <button class="yellow-btn" onclick="chooseOperator('/')"><i class="fa-solid fa-divide"></i></button>
+        </div>
+        <div class="row2">
+            <button class="black-btn" onclick="appendNumber('7')">7</button>
+            <button class="black-btn" onclick="appendNumber('8')">8</button>
+            <button class="black-btn" onclick="appendNumber('9')">9</button>
+            <button class="yellow-btn" onclick="chooseOperator('*')">X</button>
+        </div>
+        <div class="row3">
+            <button class="black-btn" onclick="appendNumber('4')">4</button>
+            <button class="black-btn" onclick="appendNumber('5')">5</button>
+            <button class="black-btn" onclick="appendNumber('6')">6</button>
+            <button class="yellow-btn" onclick="chooseOperator('-')"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <div class="row4">
+            <button class="black-btn" onclick="appendNumber('1')">1</button>
+            <button class="black-btn" onclick="appendNumber('2')">2</button>
+            <button class="black-btn" onclick="appendNumber('3')">3</button>
+            <button class="yellow-btn" onclick="chooseOperator('+')">+</button>
+        </div>
+        <div class="row5">
+            <button class="black-btn" onclick="toggleSign()">+/-</button>
+            <button class="black-btn" onclick="appendNumber('0')">0</button>
+            <button class="black-btn" onclick="addDecimal()">.</button>
+            <button class="yellow-btn" onclick="calculate()">=</button>
+        </div>
+    </div>
+</body>
+<script>
+    let display = document.querySelector('#display');
+    let currentNumber = '';
+    let previousNumber = '';
+    let operator = null;
+
+
+    function appendNumber(number){
+        currentNumber += number;
+        updateDisplay();
+    }
+    function chooseOperator(selectedOperator){
+        if(currentNumber === "") return;
+        if (previousNumber !== ""){
+            calculate();
+        }
+        operator = selectedOperator;
+        previousNumber = currentNumber;
+        currentNumber=""
+    }
+    function calculate(){
+        if(previousNumber === "" || currentNumber === '' || operator === null){
+            return;
+        }
+        const firstNumber = Number(previousNumber);
+        const secondNumber = Number(currentNumber);
+        let result;
+        switch(operator){
+            case "+": 
+            result = firstNumber + secondNumber;
+            break;
+            case "-": 
+            result = firstNumber - secondNumber;
+            break;
+            case "*": 
+            result = firstNumber * secondNumber;
+            break;
+            case "/": 
+            if(secondNumber === 0){
+                display.value = "Cannot divide by 0";
+                resetCalculator();
+                return
+            }
+            result = firstNumber / secondNumber;
+            break;
+        }
+        currentNumber = String(result);
+        previousNumber = "";
+        operator= null;
+        updateDisplay();
+    }
+    function addDecimal(){
+        if(currentNumber.includes("."))return;
+        if(currentNumber ===''){
+            currentNumber="0";
+        }
+        currentNumber += "."
+        updateDisplay();
+    }
+    function clearCalculator(){
+        currentNumber="";
+        previousNumber="";
+        operator=null;
+        updateDisplay();
+    }
+    function deleteNumber(){
+        currentNumber = currentNumber.slice(0,-1);
+        updateDisplay();
+    }
+    function updateDisplay(){
+        display.value = currentNumber || '0';
+    }
+    function resetCalculator(){
+        currentNumber="";
+        previousNumber=""
+        operator=null;
+    }
+    function toggleSign(){
+        if(currentNumber === "")return;
+        currentNumber = String(Number(currentNumber)*-1);
+        updateDisplay();
+    }
+    function percentage(){
+        if(currentNumber === '')return;
+        currentNumber= String(Number(currentNumber)/100);
+        updateDisplay();
+    }
+</script>
+</html>

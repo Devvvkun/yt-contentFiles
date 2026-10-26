@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,4 +31,38 @@ confetti({
 });
 })
 </script>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confetti Celebration</title>
+</head>
+<body>
+    <button id="btn">Click me</button>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+ <script>
+const btn = document.getElementById("btn")
+btn.addEventListener('click',function(){
+confetti({
+    particleCount: 100,
+    spread:60,
+    angle:360,
+    origin:{
+        x:0.5,       //x : 0 means left edge , 0.5 means horizontal center ,  1 means right edge,
+        y:0            // y : 0 means top , 0.5 means vertical center , 1 means bottom
+    },
+    colors: [
+        '#ff0000',
+        '#00ff00'
+        ,'#0000ff',
+        '#fff000'
+    ]
+
+});
+})
+</script>
+>>>>>>> 4c2681783a91d69ba63e9624d6d879afa7d8c1a6
 </html>
