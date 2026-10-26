@@ -12,8 +12,12 @@ body{
     justify-content: center;
     align-items: center;
 }
+    @font-face {
+    font-family: "DSEG7";
+    src: url("./fonts/DSEG7-Classic.woff2") format("woff2");
+    }
 .gamediv{
-    height: 65vh;
+    max-width: 65vh;
     width: 40vw;
     background-color: rgb(255, 128, 0);
     border-radius: 4px;
@@ -24,6 +28,7 @@ body{
 }
 #guessGame{
     background-color: blanchedalmond;
+       font-family: "DSEG7", monospace;
     border:none;
     padding: 78px 40px;
     border-radius: 4px;
